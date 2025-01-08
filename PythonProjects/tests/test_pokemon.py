@@ -1,19 +1,18 @@
 import pytest
 import requests
+import json
 
 URL = 'https://api.pokemonbattle.ru/v2'
-token = '329dc898210433a168fe558429213a39'
-Header = {
-    "Content-Type" : "application/json",
-    "trainer_token":token
-    }
-pokemon = {
-    "name":"Bob",
-    "photo_id": 1
-}
-body_confirmation = {
-    "trainer_token": token
-}
+
+def test_trainers():
+    trainers = requests.get(url=f"{URL}/trainers")
+    assert trainers.status_code == 200
+
+def test_me_trainer():
+    trainer = requests.get(url=f"{URL}/trainers?trainer_id=11644")
+    trainer = json.loads(trainer.text)
+    assert trainer["data"][0]["trainer_name"] == 'DIO'
+
 
 def test_trainers():
     trainers = requests.get(url=f"{URL}/trainers",headers=Header)
