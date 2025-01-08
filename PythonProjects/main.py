@@ -6,26 +6,22 @@ Header = {
     "Content-Type" : "application/json",
     "trainer_token":token
     }
-pokemon = {
+Pokemon = {
     "name":"Bob",
     "photo_id": 1
 }
-body_confirmation = {
-    "trainer_token": token
-}
-
-create = requests.post(url=f'{URL}/pokemons', headers=Header, json=pokemon).text
+create = requests.post(url=f'{URL}/pokemons', headers=Header, json=Pokemon).text
 print(create)
 create = json.loads(create)
-change_json = {
+Change_json = {
 "pokemon_id": create["id"],
 "name": "Bob2",
 "photo_id": 2
 }
-change = requests.put(url=f"{URL}/pokemons",headers=Header, json=change_json)
+change = requests.put(url=f"{URL}/pokemons",headers=Header, json=Change_json)
 print(change.text)
-add_json = {
+Add_json = {
     "pokemon_id": create["id"]
 }
-add = requests.post(url=f"{URL}/trainers/add_pokeball",headers=Header,json=add_json)
+add = requests.post(url=f"{URL}/trainers/add_pokeball",headers=Header,json=Add_json)
 print(add.text)
